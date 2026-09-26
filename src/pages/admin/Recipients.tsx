@@ -193,6 +193,7 @@ export default function Recipients() {
                         size="icon" 
                         onClick={() => handleDelete(rec.id)} 
                         className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                        aria-label={rec.member?.full_name ? `Delete recipient ${rec.member.full_name}` : "Delete recipient"}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
