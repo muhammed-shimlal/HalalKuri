@@ -5,30 +5,26 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/s
 import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 
-export default function AdminLayout() {
-  const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { signOut } = useAuth()
+const adminLinks = [
+  { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
+  { name: 'Members', path: '/admin/members', icon: Users },
+  { name: 'Contributions', path: '/admin/contributions', icon: Wallet },
+  { name: 'Recipients', path: '/admin/recipients', icon: Trophy },
+  { name: 'Announcements', path: '/admin/announcements', icon: Megaphone },
+  { name: 'Documents', path: '/admin/documents', icon: FileText },
+  { name: 'Reports', path: '/admin/reports', icon: FileText },
+  { name: 'Website Content', path: '/admin/website', icon: FileText },
+  { name: 'Settings', path: '/admin/settings', icon: Settings },
+]
 
-  const handleLogout = async () => {
-    await signOut()
-    navigate('/login', { replace: true })
-  }
+interface SidebarContentProps {
+  currentPath: string
+  onCloseMobileNav?: () => void
+  onLogout: () => Promise<void>
+}
 
-  const links = [
-    { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
-    { name: 'Members', path: '/admin/members', icon: Users },
-    { name: 'Contributions', path: '/admin/contributions', icon: Wallet },
-    { name: 'Recipients', path: '/admin/recipients', icon: Trophy },
-    { name: 'Announcements', path: '/admin/announcements', icon: Megaphone },
-    { name: 'Documents', path: '/admin/documents', icon: FileText },
-    { name: 'Reports', path: '/admin/reports', icon: FileText },
-    { name: 'Website Content', path: '/admin/website', icon: FileText },
-    { name: 'Settings', path: '/admin/settings', icon: Settings },
-  ]
-
-  const SidebarContent = () => (
+function SidebarContent({ currentPath, onCloseMobileNav, onLogout }: SidebarContentProps) {
+  return (
     <div className="flex flex-col h-full bg-card border-r border-border w-64 p-4">
       <div className="flex items-center gap-2 mb-8 px-2">
         <div className="w-8 h-8 rounded-md bg-gold-500 flex items-center justify-center text-white font-bold">
@@ -37,14 +33,14 @@ export default function AdminLayout() {
         <span className="font-bold text-lg">Admin Portal</span>
       </div>
       <nav className="flex-1 space-y-1">
-        {links.map((link) => {
+        {adminLinks.map((link) => {
           const Icon = link.icon
-          const isActive = location.pathname === link.path
+          const isActive = currentPath === link.path
           return (
             <Link
               key={link.name}
               to={link.path}
-              onClick={() => setIsOpen(false)}
+              onClick={onCloseMobileNav}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                 isActive
                   ? 'bg-gold-500/10 text-gold-500'
@@ -60,7 +56,7 @@ export default function AdminLayout() {
       <div className="pt-4 border-t border-border mt-auto">
         <Button 
           variant="ghost" 
-          onClick={handleLogout}
+          onClick={onLogout}
           className="w-full justify-start text-muted-foreground hover:text-destructive"
         >
           <LogOut className="w-5 h-5 mr-3" />
@@ -69,12 +65,24 @@ export default function AdminLayout() {
       </div>
     </div>
   )
+}
+
+export default function AdminLayout() {
+  const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { signOut } = useAuth()
+
+  const handleLogout = async () => {
+    await signOut()
+    navigate('/login', { replace: true })
+  }
 
   return (
     <div className="min-h-screen bg-background flex">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
-        <SidebarContent />
+        <SidebarContent currentPath={location.pathname} onLogout={handleLogout} />
       </div>
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -88,13 +96,17 @@ export default function AdminLayout() {
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Toggle navigation menu">
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-64">
               <SheetTitle className="sr-only">Admin Navigation</SheetTitle>
-              <SidebarContent />
+              <SidebarContent
+                currentPath={location.pathname}
+                onCloseMobileNav={() => setIsOpen(false)}
+                onLogout={handleLogout}
+              />
             </SheetContent>
           </Sheet>
         </header>
