@@ -154,7 +154,7 @@ export default function Reports() {
               <FileSpreadsheet className="w-4 h-4 mr-2" />
               Export Excel
             </Button>
-            <Button onClick={handlePrint} disabled={isLoading} variant="outline" className="flex-none">
+            <Button onClick={handlePrint} disabled={isLoading} variant="outline" className="flex-none" aria-label="Print report">
               <Printer className="w-4 h-4" />
             </Button>
           </div>
