@@ -231,10 +231,24 @@ export default function Members() {
                     </td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex justify-end gap-2">
-                        <Button variant="ghost" size="icon" onClick={() => handleEdit(member)} className="h-8 w-8 text-muted-foreground hover:text-gold-500">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEdit(member)}
+                          className="h-8 w-8 text-muted-foreground hover:text-gold-500"
+                          aria-label={`Edit ${member.full_name}`}
+                          title={`Edit ${member.full_name}`}
+                        >
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" onClick={() => handleDelete(member.id)} className="h-8 w-8 text-muted-foreground hover:text-destructive">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(member.id)}
+                          className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                          aria-label={`Delete ${member.full_name}`}
+                          title={`Delete ${member.full_name}`}
+                        >
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
