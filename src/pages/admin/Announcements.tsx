@@ -186,14 +186,20 @@ export default function Announcements() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-xl font-bold">{ann.title}</h3>
-                  <button onClick={() => togglePublish(ann)} className="hover:opacity-80 transition-opacity">
+                  <button
+                    type="button"
+                    onClick={() => togglePublish(ann)}
+                    className="hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-full"
+                    aria-label={ann.published ? "Unpublish announcement" : "Publish announcement"}
+                    title={ann.published ? "Click to change to draft status" : "Click to publish immediately"}
+                  >
                     {ann.published ? (
                       <span className="flex items-center gap-1 text-green-500 text-xs font-medium bg-green-500/10 px-2 py-1 rounded-full border border-green-500/20">
-                        <Eye className="w-3 h-3" /> Published
+                        <Eye className="w-3 h-3" aria-hidden="true" /> Published
                       </span>
                     ) : (
                       <span className="flex items-center gap-1 text-orange-500 text-xs font-medium bg-orange-500/10 px-2 py-1 rounded-full border border-orange-500/20">
-                        <EyeOff className="w-3 h-3" /> Draft
+                        <EyeOff className="w-3 h-3" aria-hidden="true" /> Draft
                       </span>
                     )}
                   </button>
