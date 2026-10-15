@@ -122,6 +122,7 @@ export default function Documents() {
                   size="icon" 
                   onClick={() => handleDelete(doc)}
                   className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                  aria-label={`Delete document: ${doc.title}`}
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
