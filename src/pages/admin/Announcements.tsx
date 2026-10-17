@@ -186,7 +186,12 @@ export default function Announcements() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-xl font-bold">{ann.title}</h3>
-                  <button onClick={() => togglePublish(ann)} className="hover:opacity-80 transition-opacity">
+                  <button
+                    onClick={() => togglePublish(ann)}
+                    aria-label={ann.published ? `Unpublish announcement ${ann.title}` : `Publish announcement ${ann.title}`}
+                    title={ann.published ? "Click to unpublish" : "Click to publish"}
+                    className="hover:opacity-80 transition-opacity"
+                  >
                     {ann.published ? (
                       <span className="flex items-center gap-1 text-green-500 text-xs font-medium bg-green-500/10 px-2 py-1 rounded-full border border-green-500/20">
                         <Eye className="w-3 h-3" /> Published
