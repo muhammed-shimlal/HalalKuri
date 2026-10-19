@@ -87,7 +87,10 @@ export default function MemberLayout() {
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-card border-t border-border z-40 flex items-center justify-around h-16 px-2 safe-area-bottom">
+      <nav
+        aria-label="Mobile Navigation"
+        className="md:hidden fixed bottom-0 left-0 w-full bg-card border-t border-border z-40 flex items-center justify-around h-16 px-2 safe-area-bottom"
+      >
         {links.map((link) => {
           const Icon = link.icon
           const isActive = location.pathname === link.path
@@ -95,11 +98,12 @@ export default function MemberLayout() {
             <Link
               key={link.name}
               to={link.path}
+              aria-current={isActive ? 'page' : undefined}
               className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${
                 isActive ? 'text-gold-500' : 'text-muted-foreground'
               }`}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="w-5 h-5" aria-hidden="true" />
               <span className="text-[10px] font-medium">{link.name}</span>
             </Link>
           )
