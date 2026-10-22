@@ -44,6 +44,7 @@ export default function AdminLayout() {
             <Link
               key={link.name}
               to={link.path}
+              aria-current={isActive ? 'page' : undefined}
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                 isActive
@@ -88,7 +89,7 @@ export default function AdminLayout() {
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Open navigation menu">
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>

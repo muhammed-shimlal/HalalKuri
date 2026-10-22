@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/s
 
 export default function PublicLayout() {
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -34,6 +35,7 @@ export default function PublicLayout() {
               <Link
                 key={link.name}
                 to={link.path}
+                aria-current={location.pathname === link.path ? 'page' : undefined}
                 className="text-sm font-medium text-muted-foreground hover:text-gold-500 transition-colors"
               >
                 {link.name}
@@ -61,6 +63,7 @@ export default function PublicLayout() {
                   <Link
                     key={link.name}
                     to={link.path}
+                    aria-current={location.pathname === link.path ? 'page' : undefined}
                     onClick={() => setIsOpen(false)}
                     className="text-lg font-medium text-muted-foreground hover:text-gold-500 transition-colors"
                   >
