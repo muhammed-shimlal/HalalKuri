@@ -186,7 +186,13 @@ export default function Announcements() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-xl font-bold">{ann.title}</h3>
-                  <button onClick={() => togglePublish(ann)} className="hover:opacity-80 transition-opacity">
+                  <button
+                    type="button"
+                    onClick={() => togglePublish(ann)}
+                    className="hover:opacity-80 transition-opacity rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    aria-label={`Toggle publish status for ${ann.title}. Currently ${ann.published ? 'Published' : 'Draft'}`}
+                    title={ann.published ? 'Click to unpublish' : 'Click to publish'}
+                  >
                     {ann.published ? (
                       <span className="flex items-center gap-1 text-green-500 text-xs font-medium bg-green-500/10 px-2 py-1 rounded-full border border-green-500/20">
                         <Eye className="w-3 h-3" /> Published
@@ -204,10 +210,10 @@ export default function Announcements() {
                 </div>
               </div>
               <div className="flex gap-2 w-full md:w-auto justify-end">
-                <Button variant="outline" size="sm" onClick={() => handleEdit(ann)}>
+                <Button variant="outline" size="sm" onClick={() => handleEdit(ann)} aria-label={`Edit announcement: ${ann.title}`}>
                   <Edit className="w-4 h-4 mr-2" /> Edit
                 </Button>
-                <Button variant="outline" size="sm" onClick={() => handleDelete(ann.id)} className="text-destructive hover:bg-destructive/10 border-destructive/20">
+                <Button variant="outline" size="sm" onClick={() => handleDelete(ann.id)} className="text-destructive hover:bg-destructive/10 border-destructive/20" aria-label={`Delete announcement: ${ann.title}`}>
                   <Trash2 className="w-4 h-4 mr-2" /> Delete
                 </Button>
               </div>
