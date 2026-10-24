@@ -28,7 +28,7 @@ export default function AdminLayout() {
     { name: 'Settings', path: '/admin/settings', icon: Settings },
   ]
 
-  const SidebarContent = () => (
+  const renderSidebar = () => (
     <div className="flex flex-col h-full bg-card border-r border-border w-64 p-4">
       <div className="flex items-center gap-2 mb-8 px-2">
         <div className="w-8 h-8 rounded-md bg-gold-500 flex items-center justify-center text-white font-bold">
@@ -74,7 +74,7 @@ export default function AdminLayout() {
     <div className="min-h-screen bg-background flex">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
-        <SidebarContent />
+        {renderSidebar()}
       </div>
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -88,13 +88,13 @@ export default function AdminLayout() {
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Open navigation menu">
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-64">
               <SheetTitle className="sr-only">Admin Navigation</SheetTitle>
-              <SidebarContent />
+              {renderSidebar()}
             </SheetContent>
           </Sheet>
         </header>

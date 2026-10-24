@@ -74,6 +74,7 @@ export default function MemberLayout() {
         <Button 
           variant="ghost" 
           size="icon" 
+          aria-label="Logout"
           onClick={handleLogout}
           className="text-muted-foreground hover:text-destructive"
         >
