@@ -192,6 +192,7 @@ export default function Recipients() {
                         variant="ghost" 
                         size="icon" 
                         onClick={() => handleDelete(rec.id)} 
+                        aria-label={`Delete recipient record for ${rec.member?.full_name || 'member'}`}
                         className="h-8 w-8 text-muted-foreground hover:text-destructive"
                       >
                         <Trash2 className="w-4 h-4" />
