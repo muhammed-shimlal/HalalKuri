@@ -88,8 +88,9 @@ export default function AdminLayout() {
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Toggle navigation menu">
                 <Menu className="w-6 h-6" />
+                <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-64">
