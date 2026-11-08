@@ -75,6 +75,7 @@ export default function MemberLayout() {
           variant="ghost" 
           size="icon" 
           onClick={handleLogout}
+          aria-label="Logout"
           className="text-muted-foreground hover:text-destructive"
         >
           <LogOut className="w-5 h-5" />
